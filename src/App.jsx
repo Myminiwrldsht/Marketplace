@@ -1,3 +1,4 @@
+import Cart from "./components/Cart.jsx";
 import productImage1 from "./assets/frameworklaptop12.webp"
 import productImage2 from "./assets/frameworklaptop12diy.webp"
 import productImage3 from "./assets/frameworklaptop13pro.webp"
