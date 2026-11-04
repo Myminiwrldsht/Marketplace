@@ -1,3 +1,5 @@
+import { AddButton, RemoveButton } from "./Button.jsx";
+
 export default function ProductCard(props) {
   return (
     <div className="card h-100 border-0">
@@ -7,6 +9,7 @@ export default function ProductCard(props) {
         alt={props.name}
         style={{ opacity: props.available ? 1 : 0.4 }}
       />
+
       <div className="card-body px-0">
         <h6 className="card-title">{props.name}</h6>
 
@@ -15,6 +18,12 @@ export default function ProductCard(props) {
         ) : (
           <p className="text-danger fw-bold">Not available</p>
         )}
+
+        <div>
+          <AddButton onClick={props.onAdd} disabled={!props.available} />
+          <RemoveButton onClick={props.onRemove} />
+        </div>
+
       </div>
     </div>
   );
