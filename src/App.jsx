@@ -10,6 +10,7 @@ import productImage5 from "./assets/frameworklaptop16.webp"
 import productImage6 from "./assets/frameworklaptop16diy.webp"
 import productImage7 from "./assets/frameworklaptop12diy(13thgen).webp"
 import productImage8 from "./assets/frameworklaptop13diyedition.webp"
+import productImage9 from "./assets/frameworklaptop13pro.webp"
 
 
 import NavBar from "./components/NavBar.jsx";
@@ -26,6 +27,7 @@ const products = [
   { id: 6, name: "Framework Laptop 12 DIY Edition (13th Gen Intel® Core™)", price: "$499", available: false, image: productImage2 },
   { id: 7, name: "Framework Laptop 12 DIY Edition (13th Gen Intel® Core™)", price: "$499", available: false, image: productImage7 },
   { id: 8, name: "Framework Laptop 13 DIY Edition (Intel® Core™ Ultra Series 3)", price: "$1,199", available: true, image: productImage8 },
+  { id: 9, name: "Framework Laptop 13 Pro (Intel® Core™ Ultra Series 3)", price: "$1,599", available: true, image: productImage9 },
 ];
 
 function App() {
