@@ -1,4 +1,4 @@
-import { AddButton, RemoveButton } from "./Button.jsx";
+//import { AddButton, RemoveButton } from "./Button.jsx";
 
 export default function ProductCard(props) {
   return (
@@ -19,10 +19,12 @@ export default function ProductCard(props) {
           <p className="text-danger fw-bold">Not available</p>
         )}
 
-        <div>
-          <AddButton onClick={props.onAdd} disabled={!props.available} />
-          <RemoveButton onClick={props.onRemove} />
-        </div>
+        <button className="btn btn-dark btn-sm me-auto" 
+        disabled={!props.available}
+        onClick={props.onAdd}
+      >
+        Add to Cart
+      </button>
 
       </div>
     </div>

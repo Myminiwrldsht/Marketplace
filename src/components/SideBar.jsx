@@ -2,6 +2,8 @@ const categories = [
   { id: 1, name: "View all", count: 668 },
   { id: 2, name: "Framework Laptop", count: 21 },
   { id: 3, name: "Mainboards", count: 35 },
+  { id: 4, name: "Expansion Cards", count: 48 },
+  { id: 5, name: "Keyboards", count: 267 },
 ];
 
 export default function Sidebar() {

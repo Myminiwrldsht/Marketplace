@@ -9,6 +9,7 @@ import productImage4 from "./assets/frameworklaptop13prodiy.webp"
 import productImage5 from "./assets/frameworklaptop16.webp"
 import productImage6 from "./assets/frameworklaptop16diy.webp"
 import productImage7 from "./assets/frameworklaptop12diy(13thgen).webp"
+import productImage8 from "./assets/frameworklaptop13diyedition.webp"
 
 
 import NavBar from "./components/NavBar.jsx";
@@ -24,6 +25,7 @@ const products = [
   { id: 5, name: "Framework Laptop 16 DIY Edition (AMD Ryzen™ AI 300 Series)", price: "$1,249", available: true, image: productImage6 },
   { id: 6, name: "Framework Laptop 12 DIY Edition (13th Gen Intel® Core™)", price: "$499", available: false, image: productImage2 },
   { id: 7, name: "Framework Laptop 12 DIY Edition (13th Gen Intel® Core™)", price: "$499", available: false, image: productImage7 },
+  { id: 8, name: "Framework Laptop 13 DIY Edition (Intel® Core™ Ultra Series 3)", price: "$1,199", available: true, image: productImage8 },
 ];
 
 function App() {
@@ -68,7 +70,7 @@ function App() {
             </div>
           </div>
           <div className="col-md-3">
-            <Cart cart={cart} removeFromCart={removeFromCart} />
+            <Cart items={cart} onRemove={removeFromCart} />
           </div>
         </div>
       </div>

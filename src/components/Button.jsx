@@ -1,4 +1,4 @@
-export function AddButton({ onClick, disabled }) {
+/*export function AddButton({ onClick, disabled }) {
   return (
     <button
       type="button"
@@ -22,4 +22,4 @@ export function RemoveButton({ onClick, disabled }) {
       Remove Product
     </button>
   );
-}
+} */
