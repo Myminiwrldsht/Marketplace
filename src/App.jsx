@@ -45,17 +45,17 @@ function App() {
 
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-3 col-lg-2">
+          <div className="col-sm-2">
             <Sidebar />
           </div>
 
-          <div className="col-md-9 col-lg-10 p-4">
+          <div className="col-sm-7 p-4">
             <h2>
               Framework Laptop{" "}
               <small className="text-muted fs-6">/ {products.length} items</small>
             </h2>
 
-            <div className="row row-cols-1 row-cols-md-4 g-8 mt-2">
+            <div className="row row-cols-3 g-3 mt-2">
               {products.map((product) => (
                 <div className="col" key={product.id}>
                   <ProductCard
@@ -69,7 +69,7 @@ function App() {
               ))}
             </div>
           </div>
-          <div className="col-md-3">
+          <div className="col-sm-3">
             <Cart items={cart} onRemove={removeFromCart} />
           </div>
         </div>

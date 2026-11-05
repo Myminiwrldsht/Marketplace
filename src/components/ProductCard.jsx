@@ -7,7 +7,7 @@ export default function ProductCard(props) {
         src={props.image}
         className="card-img-top rounded"
         alt={props.name}
-        style={{ opacity: props.available ? 1 : 0.4 }}
+        style={{ height: "300px", objectFit: "cover", opacity: props.available ? 1 : 0.4 }}
       />
 
       <div className="card-body px-0">
