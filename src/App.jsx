@@ -1,24 +1,22 @@
-import {useState} from "react";
+import { useState } from "react";
 import Cart from "./components/Cart.jsx";
 
-
-import productImage1 from "./assets/frameworklaptop12.webp"
-import productImage2 from "./assets/frameworklaptop12diy.webp"
-import productImage3 from "./assets/frameworklaptop13pro.webp"
-import productImage4 from "./assets/frameworklaptop13prodiy.webp"
-import productImage5 from "./assets/frameworklaptop16.webp"
-import productImage6 from "./assets/frameworklaptop16diy.webp"
-import productImage7 from "./assets/frameworklaptop12diy(13thgen).webp"
-import productImage8 from "./assets/frameworklaptop13diyedition.webp"
-import productImage9 from "./assets/frameworklaptop13pro.webp"
-
+import productImage1 from "./assets/frameworklaptop12.webp";
+import productImage2 from "./assets/frameworklaptop12diy.webp";
+import productImage3 from "./assets/frameworklaptop13pro.webp";
+import productImage4 from "./assets/frameworklaptop13prodiy.webp";
+import productImage5 from "./assets/frameworklaptop16.webp";
+import productImage6 from "./assets/frameworklaptop16diy.webp";
+import productImage7 from "./assets/frameworklaptop12diy(13thgen).webp";
+import productImage8 from "./assets/frameworklaptop13diyedition.webp";
+import productImage9 from "./assets/frameworklaptop13pro.webp";
 
 import NavBar from "./components/NavBar.jsx";
 import Sidebar from "./components/SideBar.jsx";
 import ProductCard from "./components/ProductCard.jsx";
+import AddProductForm from "./components/AddProductForm.jsx";
 
-
-const products = [
+const initialProducts = [
   { id: 1, name: "Framework Laptop 13 Pro DIY Edition (Intel® Core™ Ultra Series 3)", price: "$1,199", available: true, image: productImage4 },
   { id: 2, name: "Framework Laptop 13 Pro (AMD Ryzen™ AI 300 Series)", price: "$2,299", available: true, image: productImage1 },
   { id: 3, name: "Framework Laptop 13 Pro (Intel® Core™ Ultra Series 3)", price: "$1,599", available: false, image: productImage3 },
@@ -31,7 +29,11 @@ const products = [
 ];
 
 function App() {
+  const [products, setProducts] = useState(initialProducts);
   const [cart, setCart] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showForm, setShowForm] = useState(false);
+
   function addToCart(product) {
     if (cart.some((item) => item.id === product.id)) return;
     setCart([...cart, product]);
@@ -41,9 +43,31 @@ function App() {
     setCart(cart.filter((item) => item.id !== id));
   }
 
+  function handleAddProduct(formData) {
+    const newProduct = {
+      id: Date.now(), 
+      name: formData.name,
+      description: formData.description,
+      price: `$${formData.price.toLocaleString("en-US")}`,
+      image: formData.image || productImage1,
+      available: formData.available,
+    };
+
+    setProducts((prev) => [...prev, newProduct]);
+  }
+
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
-      <NavBar />
+      <NavBar
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        showForm={showForm}
+        onToggleForm={() => setShowForm((prev) => !prev)}
+      />
 
       <div className="container-fluid">
         <div className="row">
@@ -54,11 +78,15 @@ function App() {
           <div className="col-sm-7 p-4">
             <h2>
               Framework Laptop{" "}
-              <small className="text-muted fs-6">/ {products.length} items</small>
+              <small className="text-muted fs-6">
+                / {filteredProducts.length} items
+              </small>
             </h2>
 
+            {showForm && <AddProductForm onAddProduct={handleAddProduct} />}
+
             <div className="row row-cols-3 g-3 mt-2">
-              {products.map((product) => (
+              {filteredProducts.map((product) => (
                 <div className="col" key={product.id}>
                   <ProductCard
                     image={product.image}
@@ -70,7 +98,14 @@ function App() {
                 </div>
               ))}
             </div>
+
+            {filteredProducts.length === 0 && (
+              <p className="text-muted mt-4">
+                No products match "{searchTerm}".
+              </p>
+            )}
           </div>
+
           <div className="col-sm-3">
             <Cart items={cart} onRemove={removeFromCart} />
           </div>
@@ -79,4 +114,5 @@ function App() {
     </>
   );
 }
-export default App
+
+export default App;
