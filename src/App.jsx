@@ -119,7 +119,11 @@ function App() {
   }
 
   function removeFromCart(id) {
-    setCart(cart.filter((item) => item.id !== id));
+    fetch(`http://localhost:4000/cart/${id}`, {
+      method: "DELETE",
+    })
+    .then(()=> {setCart(cart.filter((item) => item.id !== id))})
+    
   }
 
   function handleAddProduct(formData) {
