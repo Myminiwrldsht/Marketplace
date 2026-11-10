@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cart from "./components/Cart.jsx";
 
 import productImage1 from "./assets/frameworklaptop12.webp";
@@ -17,15 +17,69 @@ import ProductCard from "./components/ProductCard.jsx";
 import AddProductForm from "./components/AddProductForm.jsx";
 
 const initialProducts = [
-  { id: 1, name: "Framework Laptop 13 Pro DIY Edition (Intel® Core™ Ultra Series 3)", price: "$1,199", available: true, image: productImage4 },
-  { id: 2, name: "Framework Laptop 13 Pro (AMD Ryzen™ AI 300 Series)", price: "$2,299", available: true, image: productImage1 },
-  { id: 3, name: "Framework Laptop 13 Pro (Intel® Core™ Ultra Series 3)", price: "$1,599", available: false, image: productImage3 },
-  { id: 4, name: "Framework Laptop 16 (AMD Ryzen™ AI 300 Series)", price: "$1,839", available: true, image: productImage5 },
-  { id: 5, name: "Framework Laptop 16 DIY Edition (AMD Ryzen™ AI 300 Series)", price: "$1,249", available: true, image: productImage6 },
-  { id: 6, name: "Framework Laptop 12 DIY Edition (13th Gen Intel® Core™)", price: "$499", available: false, image: productImage2 },
-  { id: 7, name: "Framework Laptop 12 DIY Edition (13th Gen Intel® Core™)", price: "$499", available: false, image: productImage7 },
-  { id: 8, name: "Framework Laptop 13 DIY Edition (Intel® Core™ Ultra Series 3)", price: "$1,199", available: true, image: productImage8 },
-  { id: 9, name: "Framework Laptop 13 Pro (Intel® Core™ Ultra Series 3)", price: "$1,599", available: true, image: productImage9 },
+  {
+    id: 1,
+    name: "Framework Laptop 13 Pro DIY Edition (Intel® Core™ Ultra Series 3)",
+    price: "$1,199",
+    available: true,
+    image: productImage4,
+  },
+  {
+    id: 2,
+    name: "Framework Laptop 13 Pro (AMD Ryzen™ AI 300 Series)",
+    price: "$2,299",
+    available: true,
+    image: productImage1,
+  },
+  {
+    id: 3,
+    name: "Framework Laptop 13 Pro (Intel® Core™ Ultra Series 3)",
+    price: "$1,599",
+    available: false,
+    image: productImage3,
+  },
+  {
+    id: 4,
+    name: "Framework Laptop 16 (AMD Ryzen™ AI 300 Series)",
+    price: "$1,839",
+    available: true,
+    image: productImage5,
+  },
+  {
+    id: 5,
+    name: "Framework Laptop 16 DIY Edition (AMD Ryzen™ AI 300 Series)",
+    price: "$1,249",
+    available: true,
+    image: productImage6,
+  },
+  {
+    id: 6,
+    name: "Framework Laptop 12 DIY Edition (13th Gen Intel® Core™)",
+    price: "$499",
+    available: false,
+    image: productImage2,
+  },
+  {
+    id: 7,
+    name: "Framework Laptop 12 DIY Edition (13th Gen Intel® Core™)",
+    price: "$499",
+    available: false,
+    image: productImage7,
+  },
+  {
+    id: 8,
+    name: "Framework Laptop 13 DIY Edition (Intel® Core™ Ultra Series 3)",
+    price: "$1,199",
+    available: true,
+    image: productImage8,
+  },
+  {
+    id: 9,
+    name: "Framework Laptop 13 Pro (Intel® Core™ Ultra Series 3)",
+    price: "$1,599",
+    available: true,
+    image: productImage9,
+  },
 ];
 
 function App() {
@@ -33,6 +87,22 @@ function App() {
   const [cart, setCart] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showForm, setShowForm] = useState(false);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/product")
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:4000/cart")
+      .then((response) => response.json())
+      .then((data) => {
+        setCart(data);
+      });
+  }, []);
 
   function addToCart(product) {
     if (cart.some((item) => item.id === product.id)) return;
@@ -45,7 +115,7 @@ function App() {
 
   function handleAddProduct(formData) {
     const newProduct = {
-      id: Date.now(), 
+      id: Date.now(),
       name: formData.name,
       description: formData.description,
       price: `$${formData.price.toLocaleString("en-US")}`,
@@ -57,7 +127,7 @@ function App() {
   }
 
   const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    product.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
