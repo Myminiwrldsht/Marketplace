@@ -88,6 +88,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [showForm, setShowForm] = useState(false);
 
+  //apply useEffect state method to the product and cart endpoints
   useEffect(() => {
     fetch("http://localhost:4000/product")
       .then((response) => response.json())
@@ -104,6 +105,8 @@ function App() {
       });
   }, []);
 
+
+  //add items to the cart using POST method
   function addToCart(product) {
     if (cart.some((item) => item.id === product.id)) return;
     fetch("http://localhost:4000/cart", {
@@ -118,6 +121,7 @@ function App() {
     });
   }
 
+  //delete items from the cart using DELETE method
   function removeFromCart(id) {
     fetch(`http://localhost:4000/cart/${id}`, {
       method: "DELETE",
@@ -126,17 +130,29 @@ function App() {
     
   }
 
+// add products to the productList using POST, set image as a placeholder image if no image is provided in the form
   function handleAddProduct(formData) {
     const newProduct = {
-      id: Date.now(),
+      // id: Date.now(), //JSON server already assigns ids to new products
       name: formData.name,
       description: formData.description,
       price: `$${formData.price.toLocaleString("en-US")}`,
-      image: formData.image || productImage1,
+      image: formData.image || "/placeholder.webp",
       available: formData.available,
     };
 
-    setProducts((prev) => [...prev, newProduct]);
+     fetch("http://localhost:4000/product", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body:JSON.stringify(newProduct),
+    })
+
+    .then((response) => response.json())
+    .then((savedProduct) => {
+  setProducts((prev) => [...prev, savedProduct]);
+});
+    
+
   }
 
   const filteredProducts = products.filter((product) =>
