@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "Framework Laptop 13 Pro DIY Edition (Intel® Core™ Ultra Series 3)",
-      "price": "$1,199",
+      "price": "$1,999",
       "available": true,
       "image": "/frameworklaptop13prodiy.webp"
     },
@@ -34,13 +34,6 @@
       "price": "$1,249",
       "available": true,
       "image": "/frameworklaptop16diy.webp"
-    },
-    {
-      "id": "6",
-      "name": "Framework Laptop 12 DIY Edition (13th Gen Intel® Core™)",
-      "price": "$499",
-      "available": false,
-      "image": "/frameworklaptop12diy.webp"
     },
     {
       "id": "7",
