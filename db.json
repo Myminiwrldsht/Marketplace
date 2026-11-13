@@ -36,6 +36,13 @@
       "image": "/frameworklaptop16diy.webp"
     },
     {
+      "id": "6",
+      "name": "Framework Laptop 12 DIY Edition (13th Gen Intel® Core™)",
+      "price": "$499",
+      "available": false,
+      "image": "/frameworklaptop12diy.webp"
+    },
+    {
       "id": "7",
       "name": "Framework Laptop 12 DIY Edition (13th Gen Intel® Core™)",
       "price": "$499",
